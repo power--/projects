@@ -1,0 +1,31 @@
+1) How to install development environment.
+   install JDK 7.0 download from Oracle web site.
+   install eclipse Kepler JEE version
+   install maven apache-maven-3.0.5 or higher
+   install m2eclipse plugin
+   install github egit eclipse plugin  http://wenku.baidu.com/link?url=hD9jr0AXeawm2-IU388E7SVtpCtsQYtogcGvIY6ekr3uaRaWgEQ4zHKqowC_PBvbvxH-9Kq7M4jvDOheVW1EB_bxLL1-1ODn5HKbhVWTn8q
+   
+
+   
+   
+Set windows Environment variable
+M2_HOME = e:/apache-maven-3.0.5
+JAVA_HOME=C:/Program Files/Java/jdk1.7.0_45
+PATH= add %JAVA_HOME%/bin;%M2_HOME%/bin
+MAVEN_OPTS=
+-Xmx1024m -Xms256m -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n
+
+2) Import git poc project into local folder
+
+3) run got the foler which pom.xml is located.
+   mvn jetty:run then open http://localhost:8080
+   mvn tomcat:run then open http://localhost:9999/cxfexample/
+   
+   mvn -Djetty.port=80 jetty:run change port to 80
+   
+   LocationClientTest can be run.
+   You can also test in IE
+   
+4) Useful wiki
+   http://exampledriven.wordpress.com/2012/10/03/cxf-example-soapjax-ws-restjax-rs-spring/
+
