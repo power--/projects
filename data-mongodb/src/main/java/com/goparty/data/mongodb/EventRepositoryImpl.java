@@ -30,9 +30,8 @@ private MongoOperations mongoOperation;
 	{
 		List<Event> aCreatedEvents =  mongoOperation.find(
 				new Query(Criteria.where("owner").is(theUserId)), Event.class);
-		
 		List<Event> aAttendeeEvents = mongoOperation.find(
-				new Query(Criteria.where("attendee").elemMatch(new Criteria().is(theUserId))), Event.class);
+				new Query(Criteria.where("attendee").in(theUserId)), Event.class);
 		
 		return union(aCreatedEvents, aAttendeeEvents);
 	}
