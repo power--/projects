@@ -43,7 +43,7 @@ public interface UserService {
 	@PUT
 	@Descriptions({
 		@Description(value = "updates or creates a new user data", target = DocTarget.METHOD),
-		@Description(value = "the newly created or updated location data", target = DocTarget.RETURN)
+		@Description(value = "the newly created or updated user data", target = DocTarget.RETURN)
 	})
 	public User updateUser(User user);
 	

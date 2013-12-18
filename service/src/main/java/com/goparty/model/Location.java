@@ -11,8 +11,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.sun.istack.NotNull;
 
-@XmlRootElement(name = "LocationData")
-public class LocationData {
+@XmlRootElement(name = "location")
+public class Location {
 
 	private String id;
 	@DateTimeFormat(pattern="yyyy-mm-dd")

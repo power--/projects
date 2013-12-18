@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.goparty.exception.DuplicateLocationException;
 import com.goparty.exception.LocationNotFoundException;
 import com.goparty.exception.ValidationException;
-import com.goparty.model.LocationData;
+import com.goparty.model.Location;
 import com.goparty.webservice.client.LocationClient;
 
 
@@ -59,7 +59,7 @@ public class LocationClientController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showForm(Model model) {
 
-		model.addAttribute("locationData", new LocationData());
+		model.addAttribute("locationData", new Location());
 		
 		return "locationClient";
 		
@@ -95,11 +95,11 @@ public class LocationClientController {
 		
 		logger.debug("location param is " + location);
 		
-		LocationData locationDataResp = getLocationClient(request, LocationClient.CLIENT_TYPE.fromString(protocol)).readLocation(location);
+		Location locationDataResp = getLocationClient(request, LocationClient.CLIENT_TYPE.fromString(protocol)).readLocation(location);
 
 		logger.debug("location result is " +  locationDataResp);
 
-		List<LocationData> locationDataList = new LinkedList<LocationData>();
+		List<Location> locationDataList = new LinkedList<Location>();
 		locationDataList.add(locationDataResp);
 		model.addAttribute("locationDataList", locationDataList);
 		
@@ -108,13 +108,13 @@ public class LocationClientController {
 	} 
 	
 	@RequestMapping(value="/create", method = RequestMethod.POST)
-	public String createLocation(@RequestParam String protocol, LocationData locationData, Model model, HttpServletRequest request, BindingResult bindingResult) throws DuplicateLocationException {
+	public String createLocation(@RequestParam String protocol, Location locationData, Model model, HttpServletRequest request, BindingResult bindingResult) throws DuplicateLocationException {
 
 		logger.debug("location param is " + locationData);
 		
 		try {
-			LocationData locationDataResp = getLocationClient(request, LocationClient.CLIENT_TYPE.fromString(protocol)).createLocation(locationData);
-			List<LocationData> locationDataList = new LinkedList<LocationData>();
+			Location locationDataResp = getLocationClient(request, LocationClient.CLIENT_TYPE.fromString(protocol)).createLocation(locationData);
+			List<Location> locationDataList = new LinkedList<Location>();
 			locationDataList.add(locationDataResp);
 			model.addAttribute("locationDataList", locationDataList);
 			logger.debug("location result is " +  locationDataResp);
@@ -129,11 +129,11 @@ public class LocationClientController {
 	}
 	
 	@RequestMapping(value="/update", method = RequestMethod.POST)
-	public String updateLocation(@RequestParam String protocol, LocationData locationData, Model model, HttpServletRequest request) throws DuplicateLocationException {
+	public String updateLocation(@RequestParam String protocol, Location locationData, Model model, HttpServletRequest request) throws DuplicateLocationException {
 
 		logger.debug("location param is " + locationData);
 		
-		LocationData locationDataResp = getLocationClient(request, LocationClient.CLIENT_TYPE.fromString(protocol)).updateorCreateLocation(locationData);
+		Location locationDataResp = getLocationClient(request, LocationClient.CLIENT_TYPE.fromString(protocol)).updateorCreateLocation(locationData);
 		/*
 		new JAXBElement<LocationData>();
 
@@ -142,7 +142,7 @@ public class LocationClientController {
 
 		logger.debug("location result is " +  locationDataResp);
 
-		List<LocationData> locationDataList = new LinkedList<LocationData>();
+		List<Location> locationDataList = new LinkedList<Location>();
 		locationDataList.add(locationDataResp);
 		model.addAttribute("locationDataList", locationDataList);
 		
@@ -152,7 +152,7 @@ public class LocationClientController {
 
 	@RequestMapping(value="/readall", method = RequestMethod.GET)
 	public String readAllLocation(@RequestParam String protocol, Model model, HttpServletRequest request) throws DuplicateLocationException {
-		Collection<LocationData> locationDataList = getLocationClient(request, LocationClient.CLIENT_TYPE.fromString(protocol)).readAllLocations();
+		Collection<Location> locationDataList = getLocationClient(request, LocationClient.CLIENT_TYPE.fromString(protocol)).readAllLocations();
 
 		model.addAttribute("locationDataList", locationDataList);
 		

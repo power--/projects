@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 import com.goparty.exception.DuplicateLocationException;
 import com.goparty.exception.LocationNotFoundException;
 import com.goparty.exception.ValidationException;
-import com.goparty.model.LocationData;
+import com.goparty.model.Location;
 import com.goparty.webservice.LocationService;
 
 import java.util.Collection;
@@ -26,7 +26,7 @@ public class LocationServiceImpl implements LocationService {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private Map<String, LocationData> locations = new HashMap<String, LocationData>();
+	private Map<String, Location> locations = new HashMap<String, Location>();
 
 	@Autowired
 	private Validator validator;
@@ -34,12 +34,12 @@ public class LocationServiceImpl implements LocationService {
 	//security handled by URL mapping in the xml 
 	//@Secured("ROLE_RESTCLIENT")
 	@Override
-    public LocationData readLocation(String location) throws LocationNotFoundException {
+    public Location readLocation(String location) throws LocationNotFoundException {
 		
-		LocationData locationData = locations.get(location);
+		Location locationData = locations.get(location);
 		
 		if (locationData == null) {
-			locationData = new LocationData();
+			locationData = new Location();
 			locationData.setDate(new Date());
 			locationData.setLocation(location);
 			Random rnd = new Random();
@@ -53,7 +53,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
 	@Override
-	public LocationData createLocation(LocationData locationData) throws DuplicateLocationException {
+	public Location createLocation(Location locationData) throws DuplicateLocationException {
 		
 		if (locations.get(locationData.getLocation()) != null) {
 			throw new DuplicateLocationException();
@@ -78,7 +78,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public LocationData updateorCreateLocation(LocationData locationData) {
+	public Location updateorCreateLocation(Location locationData) {
 
 		if (locations.get(locationData.getLocation()) == null) {
 			setNewID(locationData);
@@ -90,27 +90,27 @@ public class LocationServiceImpl implements LocationService {
 		
 	}
 
-	private void setNewID(LocationData locationData) {
+	private void setNewID(Location locationData) {
 		//setting the ID
 		String id = UUID.randomUUID().toString();
 		locationData.setId(id);
 		
 	}
 	
-	private void storeLocation(LocationData locationData) {
+	private void storeLocation(Location locationData) {
 		
 		locations.put(locationData.getLocation(), locationData);
 		
 	}
 
 	@Override
-	public Collection<LocationData> readAllLocations() {
+	public Collection<Location> readAllLocations() {
 		return locations.values();
 	}
 
 	@Override
 	public void deleteLocation(String location) throws LocationNotFoundException {
-		LocationData locationData = locations.get(location);
+		Location locationData = locations.get(location);
 		
 		if (locationData == null) {
 			throw new LocationNotFoundException();

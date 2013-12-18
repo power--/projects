@@ -21,7 +21,7 @@ import org.apache.cxf.jaxrs.model.wadl.DocTarget;
 
 import com.goparty.exception.DuplicateLocationException;
 import com.goparty.exception.LocationNotFoundException;
-import com.goparty.model.LocationData;
+import com.goparty.model.Location;
 
 @Path("/location/")
 @WebService
@@ -35,7 +35,7 @@ public interface LocationService {
 		@Description(value = "returns a location data ", target = DocTarget.METHOD),
 		@Description(value = "the location data", target = DocTarget.RETURN)
 	})
-    public LocationData readLocation(@Description(value = "the string representation of the location") @PathParam("location") @NotNull @Size(max=10, min=5) String location) throws LocationNotFoundException;
+    public Location readLocation(@Description(value = "the string representation of the location") @PathParam("location") @NotNull @Size(max=10, min=5) String location) throws LocationNotFoundException;
 	
 	@WebMethod
 	@GET
@@ -44,7 +44,7 @@ public interface LocationService {
 		@Description(value = "returns all locations", target = DocTarget.METHOD),
 		@Description(value = "the location data", target = DocTarget.RETURN)
 	})
-    public Collection<LocationData> readAllLocations();
+    public Collection<Location> readAllLocations();
 	
 	@WebMethod
 	@POST
@@ -52,7 +52,7 @@ public interface LocationService {
 		@Description(value = "stores a new location data", target = DocTarget.METHOD),
 		@Description(value = "the newly created location data", target = DocTarget.RETURN)
 	})
-	public LocationData createLocation(@Valid LocationData locationData) throws DuplicateLocationException;
+	public Location createLocation(@Valid Location locationData) throws DuplicateLocationException;
 	
 	@WebMethod
 	@PUT
@@ -60,7 +60,7 @@ public interface LocationService {
 		@Description(value = "updates or creates a new location data", target = DocTarget.METHOD),
 		@Description(value = "the newly created location data", target = DocTarget.RETURN)
 	})
-	public LocationData updateorCreateLocation(@Valid LocationData locationData);
+	public Location updateorCreateLocation(@Valid Location locationData);
 
 	@WebMethod
 	@DELETE

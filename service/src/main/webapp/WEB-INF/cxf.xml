@@ -60,6 +60,8 @@
   		</jaxrs:providers>
         <jaxrs:serviceBeans>
             <ref bean="locationService"/>
+            <ref bean="userService"/>
+            <ref bean="eventService"/>
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml" />

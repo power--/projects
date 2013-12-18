@@ -12,7 +12,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import com.goparty.exception.DuplicateLocationException;
 import com.goparty.exception.LocationNotFoundException;
 import com.goparty.exception.meta.LocationResponseExceptionMapper;
-import com.goparty.model.LocationData;
+import com.goparty.model.Location;
 import com.goparty.webservice.LocationService;
 
 
@@ -64,23 +64,23 @@ public class LocationClient implements LocationService {
 	}
 	
 	@Override
-	public LocationData createLocation(LocationData locationData)
+	public Location createLocation(Location locationData)
 			throws DuplicateLocationException {
 		return locationService.createLocation(locationData);
 	}
 
 	@Override
-	public LocationData updateorCreateLocation(LocationData locationData) {
+	public Location updateorCreateLocation(Location locationData) {
 		return locationService.updateorCreateLocation(locationData);
 	}
 
 	@Override
-	public LocationData readLocation(String location) throws LocationNotFoundException {
+	public Location readLocation(String location) throws LocationNotFoundException {
 		return locationService.readLocation(location);
 	}
 
 	@Override
-	public Collection<LocationData> readAllLocations() {
+	public Collection<Location> readAllLocations() {
 		return locationService.readAllLocations();
 	}
 
